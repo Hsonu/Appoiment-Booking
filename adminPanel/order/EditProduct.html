@@ -98,6 +98,47 @@
             cursor: pointer;
             border-radius: 2px;
         }
+
+        .editForm {
+            display: flex;
+            position: absolute;
+            border: 1px solid black;
+            justify-content: center;
+            background: white;
+            flex-direction: column;
+            padding: 13px;
+            gap: 14px;
+            width: 50%;
+            height: 60%;
+            align-items: center;
+            border-radius: 4px;
+            box-shadow: 0px 0px 3px 0px black;
+
+        }
+
+        input {
+            height: 5vh;
+            border-radius: 5px;
+            border: 1px solid black;
+            padding: 10px;
+            text-transform: uppercase;
+        }
+
+        button {
+            width: 13VW;
+            height: 5vh;
+            border-radius: 9px;
+            border: 1px solid black;
+            cursor: pointer;
+            box-shadow: 0px 0px 3px 0px;
+            background-color: #adbe884f;
+        }
+
+        button:hover {
+            background-color: #198754;
+            color: #f9f9f9;
+            box-shadow: 0px 0px 3px 0px black;
+        }
     </style>
 </head>
 
@@ -129,7 +170,7 @@
                     <p class="statusp">Units</p>
                     <p class="statusp">Rate</p>
                     <p class="statusp">Amount</p>
-                    <p class="statusp">Status</p>
+                    <p class="statusp">Description</p>
                     <p class="statusp">Address</p>
                     <p class="statusp">Order Date</p>
                 </div>
@@ -176,15 +217,16 @@
                         <p class="statusp1 units">${item.Units}</p>
                         <p class="statusp1 rate">₹${item.Rate}</p>
                         <p class="statusp1">₹${totalAmount}</p>
-                        <p class="statusp1">Order placed</p>
+                        <p class="statusp1">${item.description}</p>
                         <p class="statusp1">Address</p>
                         <p class="statusp1">${new Date().toLocaleDateString()}</p>
                   <!-- 🔥 Edit Form -->
-            <div class="editForm" style="display:none;">
+            <div class="editForm"  style="display:none">
                 <input class="editName" placeholder="Name">
                 <input class="editCategory" placeholder="Category">
-                <input class="editUnits" placeholder="Units">
-                <input class="editRate" placeholder="Rate">
+                <input class="editUnits" type="number" placeholder="Units">
+                <input class="editRate" type="number" placeholder="Rate">
+                <input class="description" type="text" placeholder="description">
                 <button class="saveUpdate">Save</button>
             </div>
                     </div>`;
@@ -196,12 +238,13 @@
                 let card = e.target.closest(".statusProduct");
                 let form = card.querySelector(".editForm");
                 // let id = card.querySelector(".updateBtn").dataset.id;
-                form.style.display = "block";
+                form.style.display = "flex";
 
                 form.querySelector(".editName").value = card.querySelector(".name").innerText;
                 form.querySelector(".editCategory").value = card.querySelector(".category").innerText;
                 form.querySelector(".editUnits").value = card.querySelector(".units").innerText;
                 form.querySelector(".editRate").value = card.querySelector(".rate").innerText;
+                form.querySelector(".description").value = card.querySelector(".description").innerText
                 // card.querySelector("editForm").style.display = "none"
                 console.log(e.target.dataset.id);
             }
@@ -216,10 +259,11 @@
                     Category: card.querySelector(".editCategory").value,
                     Units: Number(card.querySelector(".editUnits").value),
                     Rate: Number(card.querySelector(".editRate").value),
+                    description: card.querySelector(".description").value
                 }
 
                 console.log(newData);
-                
+
 
                 try {
                     let updateRes = await fetch(`http://localhost:8080/updateProduct/${id}`, {
@@ -241,31 +285,16 @@
                     card.querySelector(".category").innerText = newData.Category;
                     card.querySelector(".units").innerText = newData.Units;
                     card.querySelector(".rate").innerText = newData.Rate;
+                    card.querySelector(".description").innerHTML = newData.description;
 
                     card.querySelector(".editForm").style.display = "none"
-                    
+
                 } catch (err) {
                     console.log(err);
 
                 }
 
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             if (e.target.classList.contains("deleteBtn")) {
                 let id = e.target.dataset.id;
@@ -289,14 +318,6 @@
 
             }
         })
-
-
-
-
-
-
-
-
     </script>
 </body>
 
