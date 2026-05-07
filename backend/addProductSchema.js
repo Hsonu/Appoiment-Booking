@@ -3,11 +3,11 @@ const mongoose = require("mongoose");
 const addProductSchema = new mongoose.Schema({
     Productname: {
         type: String,
-        required: true
+        // required: true
     },
     Category: {
         type: String,
-        required: true
+        // required: true
     },
     SubCategory: {
         type: String,
@@ -16,18 +16,18 @@ const addProductSchema = new mongoose.Schema({
     },
     Units: {
         type: Number,
-        required: true
+        // required: true
     },
     Rate: {
         type: Number,
-        required: true
+        // required: true
     },
     description: {
         type: String,
-        required: true
+        // required: true
     },
     photo: {
-        type: String
+        // type: String
     }
 })
 const addProducts = mongoose.model("addProduct", addProductSchema);

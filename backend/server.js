@@ -90,41 +90,47 @@ app.post("/newClient", async (req, res) => {
 
 app.post("/addProduct", async (req, res) => {
     try {
+
         console.log(req.body);
         console.log(req.files);
-        console.log(req.headers);
-        if (!req.files || !req.files.photo) {
-            return res.status(400).send("On Fill Uploade")
-        }
 
         const fille = req.files.photo;
 
         const jpgReiult = await cloudinary.uploader.upload(
             fille.tempFilePath
         );
+
         console.log(jpgReiult);
-        const addProductdata = req.body;
-        console.log(req.body);
-        addProductdata.photo = jpgReiult.secure_url;
 
+        const addProductdata = {
+            Productname: req.body.Productname,
+            Category: req.body.Category,
+            SubCategory: req.body.SubCategory,
+            Units: req.body.Units,
+            Rate: req.body.Rate,
+            description: req.body.description,
+            photo: jpgReiult.secure_url
+        };
 
+        console.log(addProductdata);
 
         const viewaddPoduct = new addProducts(addProductdata);
-        // console.log(viewaddPoduct);
 
-        const responseaddProduct = await viewaddPoduct.save()
-        console.log("✅date saved succefully✅");
+        const responseaddProduct = await viewaddPoduct.save();
+
+        console.log("✅ data saved successfully ✅");
+
         res.status(200).json(responseaddProduct);
-    }
-    catch (err) {
-        res.status(500).json({ message: "Dublicate SubCategory not allowed" })
+
+    } catch (err) {
+
         console.log(err);
 
+        res.status(500).json({
+            message: err.message
+        });
     }
-
-
-})
-
+});
 //view all product
 
 app.get("/addProduct", async (req, res) => {
