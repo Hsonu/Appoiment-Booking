@@ -121,7 +121,7 @@ app.post("/addProduct", async (req, res) => {
         const responseaddProduct = await viewaddPoduct.save();
 
         console.log("✅ data saved successfully ✅");
-
+       
         res.status(200).json(responseaddProduct);
 
     } catch (err) {
