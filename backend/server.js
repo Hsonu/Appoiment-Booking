@@ -99,6 +99,8 @@ app.post("/addProduct", async (req, res) => {
         const jpgReiult = await cloudinary.uploader.upload(
             fille.tempFilePath
         );
+        console.time("API");
+        console.timeEnd("API");
 
         console.log(jpgReiult);
 

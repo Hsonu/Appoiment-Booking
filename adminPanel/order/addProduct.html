@@ -181,7 +181,7 @@
 
             <div class="box1">
                 <p>Image</p>
-                <input type="file">
+                <input type="file" id="FillPhoto">
             </div>
 
             <button id="SaveBtn">Save</button> <!--SaveBtn-->
@@ -239,6 +239,7 @@
         let Outputaddress = document.getElementById("Outputaddress") //Outputaddress
         let outputPrductName = document.getElementById("outputPrductName") //outputPrductName
         let OutputAmount = document.getElementById("OutputAmount");
+        let FillPhotoInput = document.getElementById("FillPhoto");
 
         SaveBtn.addEventListener("click", async () => {
 
@@ -256,25 +257,41 @@
                 OutPutRate.innerHTML = "₹" + rate;
                 outPutCategoryName.innerHTML = inputCategoryName.value;
             }
+            //1stp
+            // const data = {
+            //     Productname: inputProductName.value,
+            //     Category: inputCategoryName.value,
+            //     Rate: Number(inputRate.value),
+            //     Units: Number(inputUnits.value),
+            //     description: inputDescription.value,
+            //     photo: FillPhot
+            // }
 
-            const data = {
-                Productname: inputProductName.value,
-                Category: inputCategoryName.value,
-                Rate: Number(inputRate.value),
-                Units: Number(inputUnits.value),
-                description: inputDescription.value
-            }
+            const formData = new FormData();
+
+            formData.append("Productname", inputProductName.value);
+            formData.append("Category", inputCategoryName.value);
+            formData.append("Rate", Number(inputRate.value));
+            formData.append("Units", Number(inputUnits.value));
+            formData.append("description", inputDescription.value);
+            formData.append("photo", FillPhotoInput.files[0]);
             let response = await fetch("http://localhost:8080/addProduct", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
+                body: formData
+                // headers: {
+                //     "Content-Type": "application/json"
+                // },
+                // body: JSON.stringify(data)
             });
             let result = await response.json();
             console.log(result);
             alert("Data saved")
         })
+
+
+
+
     </script>
 </body>
+
 </html>
