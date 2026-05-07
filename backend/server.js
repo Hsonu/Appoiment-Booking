@@ -11,6 +11,22 @@ const path = require("path");
 app.use(express.static(path.join(__dirname, "../frontend")));
 app.use(express.static(path.join(__dirname, "../adminPanel")))
 const nodemailer = require("nodemailer");
+const fileUpload = require("express-fileupload");
+// fileUpload({
+//     useTempFiles: true
+// })
+app.use(fileUpload({
+    useTempFiles: true
+}));
+app.use(express.urlencoded({ extended: true }));
+const cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+    cloud_name: 'drfdoy1od',
+    api_key: '773861696165423',
+    api_secret: 'wzsOT_E4C6oWKIEncQsu0w1f4x8'
+});
+
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
@@ -74,8 +90,24 @@ app.post("/newClient", async (req, res) => {
 
 app.post("/addProduct", async (req, res) => {
     try {
+        console.log(req.body);
+        console.log(req.files);
+        console.log(req.headers);
+        if (!req.files || !req.files.photo) {
+            return res.status(400).send("On Fill Uploade")
+        }
+
+        const fille = req.files.photo;
+
+        const jpgReiult = await cloudinary.uploader.upload(
+            fille.tempFilePath
+        );
+        console.log(jpgReiult);
         const addProductdata = req.body;
         console.log(req.body);
+        addProductdata.photo = jpgReiult.secure_url;
+
+
 
         const viewaddPoduct = new addProducts(addProductdata);
         // console.log(viewaddPoduct);
@@ -89,6 +121,7 @@ app.post("/addProduct", async (req, res) => {
         console.log(err);
 
     }
+
 
 })
 
@@ -118,9 +151,10 @@ app.delete("/DelProduct/:id", async (req, res) => {
 app.put("/updateProduct/:id", async (req, res) => {
     try {
         const updateDataID = req.params.id;
-        const { Productname, Category, SubCategory, Units, Rate } = req.body;
+        const { Productname, Category, SubCategory, Units, Rate, description } = req.body;
         const updateProductName = await addProducts.findByIdAndUpdate(updateDataID,
             {
+                description,
                 Productname,
                 Category,
                 // SubCategory,

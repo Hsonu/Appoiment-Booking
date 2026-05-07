@@ -106,10 +106,10 @@
             justify-content: center;
             background: white;
             flex-direction: column;
-            padding: 13px;
+            padding: 40px;
             gap: 14px;
             width: 50%;
-            height: 60%;
+            height: auto;
             align-items: center;
             border-radius: 4px;
             box-shadow: 0px 0px 3px 0px black;
@@ -215,9 +215,9 @@
                         <p class="statusp1 name">${item.Productname}</p>
                         <p class="statusp1 category">${item.Category}</p>
                         <p class="statusp1 units">${item.Units}</p>
-                        <p class="statusp1 rate">₹${item.Rate}</p>
-                        <p class="statusp1">₹${totalAmount}</p>
-                        <p class="statusp1">${item.description}</p>
+                        <p class="statusp1 rate">${item.Rate}</p>
+                        <p class="statusp1">${totalAmount}</p>
+                        <p class="statusp1 description">${item.description}</p>
                         <p class="statusp1">Address</p>
                         <p class="statusp1">${new Date().toLocaleDateString()}</p>
                   <!-- 🔥 Edit Form -->
@@ -226,7 +226,7 @@
                 <input class="editCategory" placeholder="Category">
                 <input class="editUnits" type="number" placeholder="Units">
                 <input class="editRate" type="number" placeholder="Rate">
-                <input class="description" type="text" placeholder="description">
+                <input class="adddescription" type="text" placeholder="description">
                 <button class="saveUpdate">Save</button>
             </div>
                     </div>`;
@@ -234,6 +234,7 @@
             )
         };
         document.addEventListener("click", async (e) => {
+            
             if (e.target.classList.contains("updateBtn")) {
                 let card = e.target.closest(".statusProduct");
                 let form = card.querySelector(".editForm");
@@ -244,7 +245,7 @@
                 form.querySelector(".editCategory").value = card.querySelector(".category").innerText;
                 form.querySelector(".editUnits").value = card.querySelector(".units").innerText;
                 form.querySelector(".editRate").value = card.querySelector(".rate").innerText;
-                form.querySelector(".description").value = card.querySelector(".description").innerText
+                form.querySelector(".adddescription").value = card.querySelector(".description").innerText
                 // card.querySelector("editForm").style.display = "none"
                 console.log(e.target.dataset.id);
             }
@@ -259,7 +260,7 @@
                     Category: card.querySelector(".editCategory").value,
                     Units: Number(card.querySelector(".editUnits").value),
                     Rate: Number(card.querySelector(".editRate").value),
-                    description: card.querySelector(".description").value
+                    description: card.querySelector(".adddescription").value,
                 }
 
                 console.log(newData);
@@ -285,8 +286,8 @@
                     card.querySelector(".category").innerText = newData.Category;
                     card.querySelector(".units").innerText = newData.Units;
                     card.querySelector(".rate").innerText = newData.Rate;
-                    card.querySelector(".description").innerHTML = newData.description;
-
+                    card.querySelector(".description").innerText = newData.description;
+                    
                     card.querySelector(".editForm").style.display = "none"
 
                 } catch (err) {

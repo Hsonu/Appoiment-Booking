@@ -22,9 +22,12 @@ const addProductSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    description:{
-        type : String,
-        required :true
+    description: {
+        type: String,
+        required: true
+    },
+    photo: {
+        type: String
     }
 })
 const addProducts = mongoose.model("addProduct", addProductSchema);
