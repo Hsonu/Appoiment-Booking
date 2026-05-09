@@ -158,6 +158,10 @@
                 <p>Category</p>
                 <input id="inputCategoryName" type="text"><!--inputCategoryName-->
             </div>
+            <div class="box1">
+                <p>SubCategory</p>
+                <input id="inputSubCategoryName" type="text"><!--inputSubCategoryName-->
+            </div>
 
             <div class="box1">
                 <p>Units</p>
@@ -230,6 +234,7 @@
         let inputUnits = document.getElementById("inputUnits"); //inputUnits
         let inputRate = document.getElementById("inputRate"); //inputRate
         let inputDescription = document.getElementById("inputDescription"); //inputDescription
+        let inputSubCategoryName = document.getElementById("inputSubCategoryName") //inputSubCategoryName
         let SaveBtn = document.getElementById("SaveBtn") //SaveBtn
         //OutPut
         let outputOrderStatus = document.getElementById("outputOrderStatus") //outputOrderStatus
@@ -275,6 +280,8 @@
             formData.append("Units", Number(inputUnits.value));
             formData.append("description", inputDescription.value);
             formData.append("photo", FillPhotoInput.files[0]);
+            formData.append("SubCategory" , inputSubCategoryName.value);
+            
             let response = await fetch("http://localhost:8080/addProduct", {
                 method: "POST",
                 body: formData
