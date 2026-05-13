@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<style>
+    body {
+        /* background-color: rgb(2 2 2 / 3%); */
+        background-color: rgb(2 2 2 / 9%);
+    }
+
+    .cardDetaislDiv {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        width: 90%;
+        background-color: #fff;
+        padding: 12px;
+        border-radius: 5px;
+    }
+
+    .MainDivDesing {
+
+        display: flex;
+        justify-content: center;
+        /* width: 90%; */
+
+    }
+
+    .DetailsImgShow {
+        height: 15vh;
+    }
+
+    .DetailsIMGmainDiv {
+        display: flex;
+        padding: 10px;
+    }
+
+    .DetailsProducatName {
+        padding: 20px;
+    }
+
+    .TwoDivMarger {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 80%;
+    }
+
+    .DetailsBuyBtn {
+        display: flex;
+        justify-content: end;
+    }
+
+    .BuyBtn {
+        transition: 0.3s;
+        background-color: pink;
+
+    }
+
+    .BuyBtn:hover {
+        background-color: rgba(255, 62, 94, 0.74);
+    }
+</style>
+
+<body>
+    <header>
+        <div>
+            <div id="headerMainDiv">
+                <div>
+                    <a href="./index.html"> <img id="MainLogo"
+                            src="https://cdn-icons-png.freepik.com/512/5278/5278590.png"> </a>
+                </div>
+                <div>
+                    <input id="searchInput" placeholder="Search" type="text">
+                </div>
+                <div id="LoginBtnClickF">
+                    <p class="Plogin">Login/Sign up</p>
+                    <p class="Plogin">My Account</p>
+                </div>
+                <div>
+                    <img id="CartBtn"
+                        src="https://icon-library.com/images/white-shopping-cart-icon/white-shopping-cart-icon-2.jpg">
+                </div>
+            </div>
+        </div>
+    </header>
+    <section>
+        <div class="MainDivDesing" style="padding: 10px;">
+            <div class="TwoDivMarger">
+                <div class="cardDetaislDiv">
+                    <div>
+                        <p>Deliver to:</p>
+                    </div>
+                    <div>
+                        <p>Sonu Raj</p>
+                        <p>Nagwa kali mai, Simri Subdistrict, Buxar District 802133</p>
+                        <p>8603632642</p>
+                    </div>
+                    <div class="DetailsBuyBtn">
+                        <button type="button" class="BuyBtn">Change</button>
+                    </div>
+                </div>
+                <div class="cardDetaislDiv">
+                    <div class="DetailsIMGmainDiv">
+                        <div>
+                            <img class="DetailsImgShow"
+                                src="https://kinclimg2.bluestone.com/f_webp,c_scale,w_1024,b_rgb:f0f0f0/giproduct/BINS0799R11_YAA18DIG6SOG60015_ABCD00-PICS-00001-1024-66182.png">
+                        </div>
+                        <div class="DetailsProducatName">
+                            <p>The Nomi Bridal Ring Set</p>
+                            <p>₹ 1,34,725</p>
+                        </div>
+                    </div>
+                    <div class="DetailsBuyBtn">
+                        <button type="button" class="BuyBtn">Continue</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div id="d-img">
+            <div id="main-li">
+                <div>
+                    <ul>
+                        <b>
+                            <li class="li-end">SHOP</li>
+                        </b>
+                        <a href="./allProduct.html">
+                            <li class="li-end">All Jewelry</li>
+                        </a>
+                        <li class="li-end">Rings</li>
+                        <li class="li-end">Necklaces</li>
+                        <li class="li-end">New Arrivals</li>
+                    </ul>
+                </div>
+                <div>
+                    <ul>
+                        <b>
+                            <li class="li-end">COMPANY</li>
+                        </b>
+                        <a href="./aboutPage.html">
+                            <li class="li-end">About Us</li>
+                        </a>
+                        <a href="./ContactPage.html">
+                            <li class="li-end">Contact</li>
+                        </a>
+                        <li class="li-end">FAQ</li>
+                        <li class="li-end">Shipping Info</li>
+                    </ul>
+                </div>
+                <div>
+                    <ul>
+                        <b>
+                            <li class="li-end">LEGAL</li>
+                        </b>
+                        <li class="li-end">Terms of Service</li>
+                        <li class="li-end">Privacy</li>
+                        <li class="li-end">Refund Policy</li>
+                        <li class="li-end">Shipping Policy</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
