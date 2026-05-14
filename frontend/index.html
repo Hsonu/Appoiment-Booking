@@ -12,7 +12,8 @@
         padding: 0;
         margin: 0;
     }
-    p{
+
+    p {
         margin-bottom: 0;
     }
 
@@ -92,6 +93,7 @@
         margin-left: 15px;
         padding: 12px;
         border-radius: 4px;
+        transition: 0.3s;
     }
 
     #CardDiv:hover {
@@ -136,7 +138,7 @@
         border: 1px solid pink;
         padding: 10px;
         cursor: pointer;
-
+        transition: 0.3s;
     }
 
     .BuyBtn:hover {
@@ -460,12 +462,12 @@
                 </div>
                 <div class="PriceAndBuyBtn">
                     <p id="PriceP">₹ 1,34,725</p>
-                    <!-- <a href="./buyProduct.html">
+                    <a href="./buyProduct.html">
                         <p class="BuyBtn">BUY NOW</p>
-                    </a> -->
+                    </a>
                 </div>
             </div>
-            <div id="CardDiv">
+            <!-- <div id="CardDiv">
                 <div id="imgdiv">
                     <a href="./buyProduct.html"> <img id="ProductImage"
                             src="https://kinclimg8.bluestone.com/f_webp,c_scale,w_1024,b_rgb:f0f0f0/giproduct/BIAB0560N13_YAA18DIG6XXXXXXXX_ABCD00-PICS-00003-1024-73088.png">
@@ -477,7 +479,7 @@
                 <div class="PriceAndBuyBtn">
                     <p id="PriceP">₹ 5,04,972</p>
                     <!-- <p class="BuyBtn">BUY NOW</p> -->
-                </div>
+            <!-- </div>
             </div>
             <div id="CardDiv">
                 <div id="imgdiv">
@@ -490,8 +492,8 @@
                 </div>
                 <div class="PriceAndBuyBtn">
                     <p id="PriceP">₹ 1,47,275</p>
-                    <!-- <p class="BuyBtn">BUY NOW</p> -->
-                </div>
+                    <p class="BuyBtn">BUY NOW</p> -->
+            <!-- </div>
             </div>
             <div id="CardDiv">
                 <div id="imgdiv">
@@ -504,9 +506,9 @@
                 </div>
                 <div class="PriceAndBuyBtn">
                     <p id="PriceP">₹ 91,465</p>
-                    <!-- <p class="BuyBtn">BUY NOW</p> -->
+                     <p class="BuyBtn">BUY NOW</p> 
                 </div>
-            </div>
+            </div>   -->
         </div>
     </section>
     <footer>
@@ -560,6 +562,7 @@
         let mainf = document.getElementById("mainf")
         let LoginBtnClickF = document.getElementById("LoginBtnClickF");
         let loginBtn = document.getElementById("loginBtn");
+        let BuyBtn = document.getElementById("BuyBtn");
         LoginBtnClickF.addEventListener("click", () => {
             mainf.style.display = "flex";
             // bodyf.style.display = "none"
@@ -568,6 +571,41 @@
         coloseBtn.addEventListener("click", () => {
             mainf.style.display = "none";
         })
+
+        async function getData() {
+            let res = await fetch("http://localhost:8080/addProduct")
+            let data = await res.json();
+            console.log(data);
+            showDate(data)
+
+
+        }
+        getData()
+        function showDate(data) {
+            let mainDivCard = document.getElementById("mainDivCard");
+            data.forEach((item) => {
+                mainDivCard.innerHTML += `
+                 <div id="CardDiv">
+                <div id="imgdiv">
+                    <a href="./buyProduct.html"> <img id="ProductImage"
+                            src="${item.photo}">
+                    </a>
+                </div>
+                <div id="titleName">
+                    <p id="titleP">${item.Productname}</p>
+                </div>
+                <div class="PriceAndBuyBtn">
+                    <p id="PriceP">₹${item.Rate}</p>
+                    <a href="./buyProduct.html">
+                        <p class="BuyBtn">BUY NOW</p>
+                    </a>
+                </div>
+            </div>
+                
+                `
+            })
+        }
+
 
     </script>
 </body>
