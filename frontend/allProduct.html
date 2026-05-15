@@ -175,9 +175,11 @@
         text-decoration: none;
         color: black;
     }
- ::placeholder{
-            color: black;
-        }
+
+    ::placeholder {
+        color: black;
+    }
+
     @media only screen and (max-width: 768px) {
         /* #headerMainDiv {
             width: 100%;
@@ -270,7 +272,7 @@
     </section> -->
     <section>
         <div id="mainDivCard">
-            <div id="CardDiv">
+            <!-- <div id="CardDiv">
                 <div id="imgdiv">
                     <img id="ProductImage"
                         src="https://kinclimg2.bluestone.com/f_webp,c_scale,w_1024,b_rgb:f0f0f0/giproduct/BINS0799R11_YAA18DIG6SOG60015_ABCD00-PICS-00001-1024-66182.png">
@@ -280,10 +282,10 @@
                 </div>
                 <div class="PriceAndBuyBtn">
                     <p id="PriceP">₹ 1,34,725</p>
-                    <!-- <p class="BuyBtn">BUY NOW</p> -->
-                </div>
-            </div>
-            <div id="CardDiv">
+                     <p class="BuyBtn">BUY NOW</p> -->
+            <!-- </div> -->
+        </div>
+        <!-- <div id="CardDiv">
                 <div id="imgdiv">
                     <img id="ProductImage"
                         src="https://kinclimg8.bluestone.com/f_webp,c_scale,w_1024,b_rgb:f0f0f0/giproduct/BIAB0560N13_YAA18DIG6XXXXXXXX_ABCD00-PICS-00003-1024-73088.png">
@@ -294,9 +296,9 @@
                 <div class="PriceAndBuyBtn">
                     <p id="PriceP">₹ 5,04,972</p>
                     <!-- <p class="BuyBtn">BUY NOW</p> -->
-                </div>
-            </div>
-            <div id="CardDiv">
+        <!-- </div>
+            </div> -->
+        <!-- <div id="CardDiv">
                 <div id="imgdiv">
                     <img id="ProductImage"
                         src="https://kinclimg4.bluestone.com/f_webp,c_scale,w_1024,b_rgb:f0f0f0/giproduct/BIAB0669O09_YAA18DIG6XXXXXXXX_ABCD00-PICS-00002-1024-50581.png">
@@ -307,9 +309,9 @@
                 <div class="PriceAndBuyBtn">
                     <p id="PriceP">₹ 1,47,275</p>
                     <!-- <p class="BuyBtn">BUY NOW</p> -->
-                </div>
-            </div>
-            <div id="CardDiv">
+        <!-- </div>
+            </div> -->
+        <!-- <div id="CardDiv">
                 <div id="imgdiv">
                     <img id="ProductImage"
                         src="https://kinclimg6.bluestone.com/f_webp,c_scale,w_1024,b_rgb:f0f0f0/giproduct/BIDG0396T02_YAA18DIG6XXXXXXXX_ABCD00-PICS-00004-1024-31376.png">
@@ -320,8 +322,8 @@
                 <div class="PriceAndBuyBtn">
                     <p id="PriceP">₹ 91,465</p>
                     <!-- <p class="BuyBtn">BUY NOW</p> -->
-                </div>
-            </div>
+        <!-- </div>
+            </div>  -->
         </div>
     </section>
     <footer>
@@ -370,5 +372,41 @@
         </div>
     </footer>
 </body>
+
+<script>
+
+    async function getData() {
+        let res = await fetch("http://localhost:8080/addProduct")
+        let data = await res.json();
+        console.log(data);
+        showDate(data)
+    }
+    getData()
+    function showDate(data) {
+        let mainDivCard = document.getElementById("mainDivCard");
+        data.forEach((item) => {
+            mainDivCard.innerHTML += `
+                 <div id="CardDiv">
+                <div id="imgdiv">
+                    <a href="./buyProduct.html"> <img id="ProductImage"
+                            src="${item.photo}">
+                    </a>
+                </div>
+                <div id="titleName">
+                    <p id="titleP">${item.Productname}</p>
+                </div>
+                <div class="PriceAndBuyBtn">
+                    <p id="PriceP">₹${item.Rate}</p>
+                    <a href="./buyProduct.html">
+                        <p class="BuyBtn">BUY NOW</p>
+                    </a>
+                </div>
+            </div>
+                
+                `
+        })
+    }
+
+</script>
 
 </html>

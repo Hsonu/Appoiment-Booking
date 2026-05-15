@@ -323,7 +323,7 @@
         }
 
         #titleP {
-            font-size: 3vw;
+            font-size: 17px;
             flex-wrap: wrap;
             padding: 4px;
         }
@@ -451,7 +451,7 @@
     </section>
     <section>
         <div id="mainDivCard">
-            <div id="CardDiv">
+            <!-- <div id="CardDiv">
                 <div id="imgdiv">
                     <a href="./buyProduct.html"> <img id="ProductImage"
                             src="https://kinclimg2.bluestone.com/f_webp,c_scale,w_1024,b_rgb:f0f0f0/giproduct/BINS0799R11_YAA18DIG6SOG60015_ABCD00-PICS-00001-1024-66182.png">
@@ -465,9 +465,9 @@
                     <a href="./buyProduct.html">
                         <p class="BuyBtn">BUY NOW</p>
                     </a>
-                </div>
-            </div>
-            <!-- <div id="CardDiv">
+                </div> -->
+        </div>
+        <!-- <div id="CardDiv">
                 <div id="imgdiv">
                     <a href="./buyProduct.html"> <img id="ProductImage"
                             src="https://kinclimg8.bluestone.com/f_webp,c_scale,w_1024,b_rgb:f0f0f0/giproduct/BIAB0560N13_YAA18DIG6XXXXXXXX_ABCD00-PICS-00003-1024-73088.png">
@@ -479,7 +479,7 @@
                 <div class="PriceAndBuyBtn">
                     <p id="PriceP">₹ 5,04,972</p>
                     <!-- <p class="BuyBtn">BUY NOW</p> -->
-            <!-- </div>
+        <!-- </div>
             </div>
             <div id="CardDiv">
                 <div id="imgdiv">
@@ -493,7 +493,7 @@
                 <div class="PriceAndBuyBtn">
                     <p id="PriceP">₹ 1,47,275</p>
                     <p class="BuyBtn">BUY NOW</p> -->
-            <!-- </div>
+        <!-- </div>
             </div>
             <div id="CardDiv">
                 <div id="imgdiv">
@@ -562,7 +562,7 @@
         let mainf = document.getElementById("mainf")
         let LoginBtnClickF = document.getElementById("LoginBtnClickF");
         let loginBtn = document.getElementById("loginBtn");
-        let BuyBtn = document.getElementById("BuyBtn");
+
         LoginBtnClickF.addEventListener("click", () => {
             mainf.style.display = "flex";
             // bodyf.style.display = "none"
@@ -596,15 +596,25 @@
                 </div>
                 <div class="PriceAndBuyBtn">
                     <p id="PriceP">₹${item.Rate}</p>
-                    <a href="./buyProduct.html">
-                        <p class="BuyBtn">BUY NOW</p>
-                    </a>
+                    
+                       <p class="BuyBtn" data-id="${item._id}">BUY NOW</p>
+                     
                 </div>
             </div>
                 
                 `
             })
+            let BuyBtn = document.querySelectorAll(".BuyBtn");
+            BuyBtn.forEach((btn) => {
+                btn.addEventListener("click", (event) => {
+                    let id = event.target.dataset.id
+                    console.log(id);
+                    console.log("btnClick");
+                    window.location.href = `buyProduct.html?id=${id}`;
+                })
+            })
         }
+
 
 
     </script>

@@ -121,7 +121,7 @@ app.post("/addProduct", async (req, res) => {
         const responseaddProduct = await viewaddPoduct.save();
 
         console.log("✅ data saved successfully ✅");
-       
+
         res.status(200).json(responseaddProduct);
 
     } catch (err) {
@@ -189,6 +189,21 @@ app.put("/updateProduct/:id", async (req, res) => {
         res.status(500).json({
             error: err.message
         })
+    }
+})
+
+app.get("/singleProduct/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+        const singleProduct = await addProducts.findById(id);
+        res.json(singleProduct);
+    }
+    catch (err) {
+
+        res.status(500).json({
+            error: err.message
+        });
+
     }
 })
 
