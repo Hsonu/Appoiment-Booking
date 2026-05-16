@@ -55,6 +55,7 @@
         background-color: #F0F0F0;
         /* padding: 10px; */
         height: auto;
+        justify-content: space-evenly;
     }
 
     .product-name-p,
@@ -131,11 +132,10 @@
         display: flex;
         flex-direction: column;
         border: 1px solid pink;
-        width: auto;
-        /* margin-left: 15px; */
-        padding: 10px;
+        width: 40vh;
+        margin-left: 15px;
+        padding: 12px;
         border-radius: 4px;
-        margin-top: 10px
     }
 
     #imgdiv {
@@ -614,9 +614,9 @@
             mainDivCard.innerHTML += `
                  <div id="CardDiv">
                 <div id="imgdiv">
-                    <a href="./buyProduct.html"> <img id="ProductImage"
+                    <img id="ProductImage"
                             src="${item.photo}">
-                    </a>
+                    
                 </div>
                 <div id="titleName">
                     <p id="titleP">${item.Productname}</p>
@@ -641,9 +641,15 @@
         let res = await fetch(`http://localhost:8080/singleProduct/${id}`)
         let data = await res.json()
         console.log(data);
-        document.getElementById("title").innerText = data.Productname;
+        document.querySelector(".product-name-p").innerText = data.Productname;
 
-        document.getElementById("image").src = data.photo;
+        document.querySelector(".product-name-price").innerText = `₹${data.Rate}`;
+
+        document.querySelector(".product-name-dis").innerText = data.description;
+
+        document.getElementById("imgPhoto").src = data.photo;
+
+
 
     }
 

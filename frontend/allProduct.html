@@ -388,22 +388,31 @@
             mainDivCard.innerHTML += `
                  <div id="CardDiv">
                 <div id="imgdiv">
-                    <a href="./buyProduct.html"> <img id="ProductImage"
+                    <img id="ProductImage"
                             src="${item.photo}">
-                    </a>
+                
                 </div>
                 <div id="titleName">
                     <p id="titleP">${item.Productname}</p>
                 </div>
                 <div class="PriceAndBuyBtn">
                     <p id="PriceP">₹${item.Rate}</p>
-                    <a href="./buyProduct.html">
-                        <p class="BuyBtn">BUY NOW</p>
-                    </a>
+                    
+                         <p class="BuyBtn" data-id="${item._id}">
+                    BUY NOW
+                </p>
+                    
                 </div>
-            </div>
-                
-                `
+            </div>`
+        })
+        let BuyBtn = document.querySelectorAll(".BuyBtn");
+        BuyBtn.forEach((btn) => {
+            btn.addEventListener("click", (event) => {
+                let id = event.target.dataset.id
+                console.log(id);
+                console.log("btnClick");
+                window.location.href = `buyProduct.html?id=${id}`;
+            })
         })
     }
 
