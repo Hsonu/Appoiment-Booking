@@ -105,15 +105,15 @@
                         <button type="button" class="BuyBtn">Change</button>
                     </div>
                 </div>
-                <div class="cardDetaislDiv">
+                <div class="cardDetaislDiv" id="showDataDiv">
                     <div class="DetailsIMGmainDiv">
                         <div>
                             <img class="DetailsImgShow"
                                 src="https://kinclimg2.bluestone.com/f_webp,c_scale,w_1024,b_rgb:f0f0f0/giproduct/BINS0799R11_YAA18DIG6SOG60015_ABCD00-PICS-00001-1024-66182.png">
                         </div>
                         <div class="DetailsProducatName">
-                            <p>The Nomi Bridal Ring Set</p>
-                            <p>₹ 1,34,725</p>
+                            <p class="ProductNamesummary">The Nomi Bridal Ring Set</p>
+                            <p class="productSummaryrate">₹ 1,34,725</p>
                         </div>
                     </div>
                     <div class="DetailsBuyBtn">
@@ -169,5 +169,59 @@
         </div>
     </footer>
 </body>
+<script>
+    async function getData() {
+        let res = await fetch("http://localhost:8080/addProduct")
+        let data = await res.json()
+        console.log(data);
+        // showDate(data);
+
+    }
+    getData()
+
+    async function getsingleProductSummar() {
+        let parmas = new URLSearchParams(window.location.search);
+        let id = parmas.get("id")
+        console.log(id);
+        let res = await fetch(`http://localhost:8080/singleProduct/${id}`)
+        let data = await res.json();
+        console.log(data);
+        
+        document.querySelector(".DetailsImgShow").src = data.photo;
+        document.querySelector(".ProductNamesummary").innerText = data.Productname
+        document.querySelector(".productSummaryrate").innerText = `₹${data.Rate}`;
+
+
+
+
+    }
+    getsingleProductSummar()
+
+    // function showDate (data){
+    // let cardDetaislDiv = document.querySelector("#showDataDiv");
+
+    // data.forEach((showItem) => {
+    //     cardDetaislDiv.innerHTML += `<div class="DetailsIMGmainDiv">
+    //                     <div>
+    //                         <img class="DetailsImgShow"
+    //                             src="${showItem.photo}">
+    //                     </div>
+    //                     <div class="DetailsProducatName">
+    //                         <p>${showItem.Productname}</p>
+    //                         <p>₹ ${showItem.Rate}</p>
+    //                     </div>
+    //                 </div>
+    //                 <div class="DetailsBuyBtn">
+    //                     <button type="button" class="BuyBtn">Continue</button>
+    //                 </div>
+            
+    //         `
+    // })
+
+       
+    // }
+    
+
+</script>
 
 </html>
