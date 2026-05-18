@@ -651,20 +651,17 @@
         document.getElementById("imgPhoto").src = data.photo;
         let BuyBtn = document.querySelector(".buybtn");
 
-            BuyBtn.addEventListener("click", () => {
+        BuyBtn.addEventListener("click", () => {
 
-                console.log(id);
-                window.location.href=`productDetails.html?id=${id}`
+            console.log(id);
+            window.location.href = `productDetails.html?id=${id}`
 
-            })
+        })
 
 
 
     }
     getSingleProduct()
-
-
-
 
 
 </script>

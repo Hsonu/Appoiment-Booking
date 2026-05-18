@@ -65,6 +65,28 @@
     .BuyBtn:hover {
         background-color: rgba(255, 62, 94, 0.74);
     }
+
+    .paymentMethodDiv {
+        font-size: 1.9vw;
+        padding: 1vh;
+
+    }
+
+    .CashOnDelivery {
+        /* margin-left: 2vw;
+            margin-top: 3vh; */
+        padding: 2vh;
+        padding-left: 1vw;
+        cursor: pointer;
+        /* background-color: #00000014; */
+        border-radius: 3px;
+
+    }
+
+    #showDataDivv {
+        display: flex;
+        gap: 1vh;
+    }
 </style>
 
 <body>
@@ -97,9 +119,9 @@
                         <p>Deliver to:</p>
                     </div>
                     <div>
-                        <p>Sonu Raj</p>
-                        <p>Nagwa kali mai, Simri Subdistrict, Buxar District 802133</p>
-                        <p>8603632642</p>
+                        <p id="customerNamePlaceOrder">Sonu Raj</p>
+                        <p id="customeradd">Nagwa kali mai, Simri Subdistrict, Buxar District 802133</p>
+                        <p id="customerMobileNumber">8603632642</p>
                     </div>
                     <div class="DetailsBuyBtn">
                         <button type="button" class="BuyBtn">Change</button>
@@ -118,6 +140,17 @@
                     </div>
                     <div class="DetailsBuyBtn">
                         <button type="button" class="BuyBtn">Continue</button>
+                    </div>
+                </div>
+                <div class="cardDetaislDiv" id="showDataDivv">
+                    <div id="paymentMethodDivmain">
+                        <p class="paymentMethodDiv">Payment Method</p>
+                    </div>
+                    <div>
+                        <p class="CashOnDelivery">Cash on Delivery</p>
+                    </div>
+                    <div class="DetailsBuyBtn">
+                        <button type="button" id="PlaceOrderBtn" class="BuyBtn">Place Order</button>
                     </div>
                 </div>
             </div>
@@ -170,6 +203,9 @@
     </footer>
 </body>
 <script>
+    const customerNamePlaceOrder = document.getElementById("customerNamePlaceOrder");
+    const customerMobileNumber = document.getElementById("customerMobileNumber");
+    const customeradd = document.getElementById("customeradd")
     async function getData() {
         let res = await fetch("http://localhost:8080/addProduct")
         let data = await res.json()
@@ -186,11 +222,29 @@
         let res = await fetch(`http://localhost:8080/singleProduct/${id}`)
         let data = await res.json();
         console.log(data);
-        
+
         document.querySelector(".DetailsImgShow").src = data.photo;
         document.querySelector(".ProductNamesummary").innerText = data.Productname
         document.querySelector(".productSummaryrate").innerText = `₹${data.Rate}`;
+        const BuyBtn = document.querySelector("#PlaceOrderBtn");
+        BuyBtn.addEventListener("click", () => {
+            fetch("http://localhost:8080/placeOrder", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify({
+                    customerName: customerNamePlaceOrder.innerText,
+                    customerMobileNumber: customerMobileNumber.innerText,
+                    customerAdd: customeradd.innerText,
+                    productName: data.Productname,
+                    rate: data.Rate,
+                    photo: data.photo
+                })
+            });
+            console.log("Order PlacedSuccessFully");
 
+        })
 
 
 
@@ -214,13 +268,20 @@
     //                 <div class="DetailsBuyBtn">
     //                     <button type="button" class="BuyBtn">Continue</button>
     //                 </div>
-            
+
     //         `
     // })
 
-       
+
     // }
-    
+    let CashOnDelivery = document.querySelector(".CashOnDelivery");
+    CashOnDelivery.addEventListener("click", () => {
+        console.log("Cash On Deliver Selected");
+        CashOnDelivery.style.backgroundColor = "#00000014";
+    })
+
+
+
 
 </script>
 

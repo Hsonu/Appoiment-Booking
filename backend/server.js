@@ -4,6 +4,7 @@ const port = 8080;
 const db = require("./db")
 const booking = require("./booking");
 const addProducts = require("./addProductSchema");
+const placeOrderData = require("./placeOrderSchema");
 const cors = require("cors");
 app.use(cors());
 app.use(express.json());
@@ -206,6 +207,28 @@ app.get("/singleProduct/:id", async (req, res) => {
 
     }
 })
+
+//Place Order
+app.post("/placeOrder", async (req, res) => {
+    try {
+        const placeOrderDataBody = req.body;
+        const viewPlaceOrderData = new placeOrderData(placeOrderDataBody);
+        const PlaceOrderResponse = await viewPlaceOrderData.save();
+        console.log(placeOrderData);
+        res.status(200).json(PlaceOrderResponse);
+
+    }
+    catch (err) {
+        res.status(500).json("internal server error");
+        console.log(err);
+    }
+})
+
+app.get("/viwePlaceOrder", async (req, res) => {
+
+    const viewDataPlaceOrder = await placeOrderData.find();
+    res.json(viewDataPlaceOrder);
+});
 
 
 

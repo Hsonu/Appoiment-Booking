@@ -87,6 +87,8 @@
 
         .maindivOrder {
             box-shadow: 0px 0px 3px 0px black;
+            /* display: flex; */
+
         }
     </style>
 </head>
@@ -111,30 +113,50 @@
 
         <!-- Content -->
         <section>
-            <div class="maindivOrder">
+            <div class="maindivOrder" id="showOrderData">
                 <div class="statusProduct">
+                    <p class="statusp">CustomerName</p>
                     <p class="statusp">Product Name</p>
-                    <p class="statusp">Category</p>
                     <p class="statusp">Units</p>
                     <p class="statusp">Rate</p>
                     <p class="statusp">Amount</p>
                     <p class="statusp">Status</p>
                     <p class="statusp">Address</p>
-                    <p class="statusp">Order Date</p>
-                </div>
-                <div class="statusProduct">
-                    <p class="statusp1">iPhone 17 Pro Max (Silver, 2 TB)</p>
-                    <p class="statusp1">Electronics</p>
-                    <p class="statusp1">1</p>
-                    <p class="statusp1">₹2,29,900</p>
-                    <p class="statusp1">₹2,29,900</p>
-                    <p class="statusp1">Order placed</p>
-                    <p class="statusp1">Address</p>
-                    <p class="statusp1">25/03/2026</p>
+                    <p class="statusp">Mobile Number</p>
                 </div>
             </div>
-        </section>
+    </div>
+    </section>
     </div>
 </body>
+<script>
+    async function viewOrderDate() {
+        const viewOrderDate = await fetch("http://localhost:8080/viwePlaceOrder")
+        const resViewOrderdate = await viewOrderDate.json()
+        console.log(resViewOrderdate);
+        showdata(resViewOrderdate)
+    }
+    viewOrderDate()
+    function showdata(data) {
+        let statusProduct = document.querySelector("#showOrderData");
+        data.forEach((item) => {
+            statusProduct.innerHTML += `
+            <div class="statusProduct">
+            <p class="statusp1">${item.customerName}</p>
+                    <p class="statusp1">${item.productName}</p>
+                    <p class="statusp1">1</p>
+                    <p class="statusp1">₹${item.rate}</p>
+                    <p class="statusp1">₹${item.rate}</p>
+                    <p class="statusp1">Order placed</p>
+                    <p class="statusp1">${item.customerAdd}</p>
+                    <p class="statusp1">${item.customerMobileNumber}</p>
+            </div>
+            `
+
+
+        })
+
+    }
+</script>
 
 </html>
